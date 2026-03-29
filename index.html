@@ -321,6 +321,274 @@
   ul { list-style: none; padding: 0; }
   ul li::before { content: '▸ '; color: var(--green); font-weight: bold; }
   ul li { margin: 0.35rem 0; }
+
+  .game-frame {
+    background: #111820;
+    border: 3px solid #2d4a3a;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 860px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(74,222,128,0.08);
+  }
+  .game-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    background: #0d1219;
+    border-bottom: 2px solid #1e3348;
+    font-size: 0.65rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .hud-group { display: flex; align-items: center; gap: 0.6rem; }
+  .hud-item { display: flex; align-items: center; gap: 0.25rem; color: var(--gray); }
+  .hud-item span:first-child { font-size: 0.85rem; }
+  .game-body { display: flex; min-height: 260px; }
+  .game-farm {
+    flex: 1;
+    padding: 6px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 2px;
+    background: #0d1219;
+  }
+  .fc {
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.6rem, 1.2vw, 0.95rem);
+    aspect-ratio: 1;
+    transition: transform 0.15s;
+  }
+  .fc:hover { transform: scale(1.15); z-index: 1; }
+  .fg { background: #1a3a1a; }
+  .fs { background: #3d2b1a; }
+  .fw { background: #2b1f15; }
+  .fp { background: #2a2520; }
+  .fh { background: #1a3d1a; border: 1px dashed #2d5a2d; }
+  .fwr { background: #132d4a; }
+  .ft { background: #0d2a0d; }
+  .game-side {
+    width: clamp(140px, 18vw, 190px);
+    background: #0d1219;
+    border-left: 2px solid #1e3348;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+  }
+  .side-section { }
+  .side-title {
+    font-size: 0.5rem;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+    font-family: var(--pixel);
+  }
+  .mg { display: flex; align-items: center; gap: 0.25rem; margin: 0.15rem 0; }
+  .mg-l { width: 24px; font-size: 0.5rem; color: var(--gray); }
+  .mg-bar { flex: 1; height: 5px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+  .mg-fill { height: 100%; border-radius: 3px; }
+  .mg-v { font-size: 0.45rem; color: var(--gray); width: 28px; text-align: right; }
+  .game-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0.6rem;
+    background: #0d1219;
+    border-top: 2px solid #1e3348;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+  }
+  .speed-group { display: flex; gap: 3px; }
+  .sp-btn {
+    padding: 2px 6px;
+    background: #1a2332;
+    border: 1px solid #1e3348;
+    border-radius: 3px;
+    color: var(--gray);
+    font-size: 0.55rem;
+    font-family: var(--sans);
+    cursor: default;
+  }
+  .sp-btn.on { border-color: var(--green); color: var(--green); background: #0d2a1a; }
+  .tool-slots { display: flex; gap: 3px; }
+  .t-slot {
+    width: clamp(24px, 3vw, 32px);
+    height: clamp(24px, 3vw, 32px);
+    background: #1a2332;
+    border: 1px solid #1e3348;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.65rem, 1vw, 0.9rem);
+  }
+  .t-slot.sel { border-color: var(--green); box-shadow: 0 0 8px rgba(74,222,128,0.25); }
+  .side-info {
+    font-size: 0.5rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .side-info strong { color: var(--white); font-weight: 600; }
+
+  .phone-mock {
+    width: 260px;
+    background: #111820;
+    border: 3px solid #333;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+  }
+  .phone-notch {
+    height: 22px;
+    background: #0d1219;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-pill { width: 50px; height: 5px; background: #2a3a4f; border-radius: 3px; }
+  .phone-body { flex: 1; display: flex; flex-direction: column; }
+  .phone-game {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1px;
+    padding: 4px;
+    background: #0d1219;
+  }
+  .phone-tabs {
+    display: flex;
+    background: #0d1219;
+    border-top: 1px solid #1e3348;
+    padding: 0.3rem 0 0.4rem;
+  }
+  .ph-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    color: var(--gray);
+  }
+  .ph-tab-icon { font-size: 0.85rem; }
+  .ph-tab-label { font-size: 0.35rem; }
+  .ph-tab.on { color: var(--green); }
+  .phone-hud {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+    background: #0d1219;
+    border-bottom: 1px solid #1e3348;
+    font-size: 0.45rem;
+    color: var(--gray);
+  }
+
+  .overlay-mock {
+    background: #111820;
+    border: 2px solid #2d4a3a;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    max-width: 360px;
+    width: 100%;
+  }
+  .overlay-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #1e3348;
+  }
+  .overlay-x {
+    width: 18px; height: 18px;
+    background: #2a3a4f;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.55rem;
+    color: var(--gray);
+  }
+  .cell-vis {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: #0d1520;
+    border-radius: 40%;
+    border: 2px solid #1a4a2a;
+    width: 130px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+  }
+  .cell-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.4rem;
+  }
+  .chem-eq {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--cyan);
+    background: #0d1520;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #1e3348;
+    text-align: center;
+    margin: 0.4rem 0;
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.55rem;
+    color: var(--gray);
+    margin: 0.15rem 0;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .slide-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--dark);
+    border: 1px solid #1e3348;
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.6rem;
+    color: var(--gray);
+    margin: 0.2rem;
+  }
+  .slide-label .dot-color {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .game-body { flex-direction: column; }
+    .game-side { width: 100%; border-left: none; border-top: 2px solid #1e3348; flex-direction: row; flex-wrap: wrap; }
+    .game-farm { grid-template-columns: repeat(7, 1fr); grid-template-rows: repeat(5, 1fr); }
+    .mockup-row { flex-direction: column !important; align-items: center; }
+  }
 </style>
 </head>
 <body>
@@ -403,8 +671,316 @@ Water + Sunlight + NPK + pH + Temp   → it grows     ✅ EcoLab Farm
     </div>
   </div>
 
-  <!-- ========== SLIDE 4: ZOOM SYSTEM ========== -->
+  <!-- ========== SLIDE 4: DESKTOP GAME VIEW ========== -->
   <div class="slide" data-slide="3">
+    <div class="full-w center">
+      <p class="pixel accent-green" style="font-size: 0.7rem; margin-bottom: 0.5rem;">GAME UI — DESKTOP</p>
+      <h2>Main Farm View</h2>
+      <p class="subtitle" style="margin-bottom: 1rem;">Top-down pixel farm with real-time science dashboard</p>
+
+      <div class="game-frame">
+        <div class="game-hud">
+          <div class="hud-group">
+            <div class="hud-item"><span>🌸</span> Spring</div>
+            <div class="hud-item"><span>☀️</span> Day 12</div>
+            <div class="hud-item"><span>🌡️</span> 22°C</div>
+          </div>
+          <div class="hud-group">
+            <div class="hud-item"><span>⭐</span> Lv.8</div>
+            <div class="hud-item"><span>💰</span> 1,250</div>
+            <div class="hud-item" style="color: var(--red);">❤️❤️❤️🖤🖤</div>
+          </div>
+        </div>
+        <div class="game-body">
+          <div class="game-farm">
+            <div class="fc ft">🌲</div><div class="fc ft">🌲</div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fwr">🌊</div><div class="fc fwr">🌊</div>
+            <div class="fc ft">🌲</div><div class="fc fg"></div><div class="fc fs">🌱</div><div class="fc fs">🌱</div><div class="fc fw">🌱</div><div class="fc fw">🌱</div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fwr">🌊</div><div class="fc fg"></div>
+            <div class="fc fg"></div><div class="fc fg"></div><div class="fc fs">🌱</div><div class="fc fw">🥬</div><div class="fc fw">🥬</div><div class="fc fw">🥬</div><div class="fc fs"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div>
+            <div class="fc fg"></div><div class="fc fp">🏠</div><div class="fc fs">🌱</div><div class="fc fw">🥬</div><div class="fc fw">🍅</div><div class="fc fw">🍅</div><div class="fc fs"></div><div class="fc fh"></div><div class="fc fh"></div><div class="fc fg"></div>
+            <div class="fc fg"></div><div class="fc fp"></div><div class="fc fg"></div><div class="fc fs">🥕</div><div class="fc fw">🥕</div><div class="fc fw">🥕</div><div class="fc fs"></div><div class="fc fh">🌻</div><div class="fc fh">🌻</div><div class="fc fg"></div>
+            <div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fs">🥕</div><div class="fc fw">🌾</div><div class="fc fw">🌾</div><div class="fc fg"></div><div class="fc fh">🌻</div><div class="fc fh"></div><div class="fc fg"></div>
+            <div class="fc ft">🌲</div><div class="fc fg">🐝</div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fp"></div><div class="fc fp"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc ft">🌲</div><div class="fc ft">🌲</div>
+          </div>
+          <div class="game-side">
+            <div class="side-section">
+              <div class="side-title">Soil</div>
+              <div class="mg"><span class="mg-l">pH</span><div class="mg-bar"><div class="mg-fill" style="width:62%; background: var(--green);"></div></div><span class="mg-v">6.2</span></div>
+              <div class="mg"><span class="mg-l">N</span><div class="mg-bar"><div class="mg-fill" style="width:45%; background: var(--blue);"></div></div><span class="mg-v">45</span></div>
+              <div class="mg"><span class="mg-l">P</span><div class="mg-bar"><div class="mg-fill" style="width:22%; background: var(--purple);"></div></div><span class="mg-v">18</span></div>
+              <div class="mg"><span class="mg-l">K</span><div class="mg-bar"><div class="mg-fill" style="width:62%; background: var(--yellow);"></div></div><span class="mg-v">62</span></div>
+              <div class="mg"><span class="mg-l">H₂O</span><div class="mg-bar"><div class="mg-fill" style="width:78%; background: var(--cyan);"></div></div><span class="mg-v">78%</span></div>
+            </div>
+            <div class="side-section">
+              <div class="side-title">Weather</div>
+              <div class="side-info">
+                <strong>☀️ Sunny</strong><br>
+                Wind: 5 km/h<br>
+                Humidity: 62%
+              </div>
+            </div>
+            <div class="side-section">
+              <div class="side-title">Selected</div>
+              <div class="side-info">
+                <strong>🍅 Tomato</strong><br>
+                Stage: Growing<br>
+                Health: ████░ 80%<br>
+                Harvest: 2 days
+              </div>
+            </div>
+            <div class="side-section">
+              <div class="side-title">Ecology</div>
+              <div class="mg"><span class="mg-l">🐝</span><div class="mg-bar"><div class="mg-fill" style="width:70%; background: var(--yellow);"></div></div><span class="mg-v">Good</span></div>
+              <div class="mg"><span class="mg-l">🐛</span><div class="mg-bar"><div class="mg-fill" style="width:25%; background: var(--red);"></div></div><span class="mg-v">Low</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="game-bottom">
+          <div class="speed-group">
+            <div class="sp-btn">⏸</div>
+            <div class="sp-btn on">▶</div>
+            <div class="sp-btn">▶▶</div>
+            <div class="sp-btn">▶▶▶</div>
+          </div>
+          <div class="tool-slots">
+            <div class="t-slot sel">💧</div>
+            <div class="t-slot">🌱</div>
+            <div class="t-slot">🧪</div>
+            <div class="t-slot">⛏️</div>
+            <div class="t-slot">🔬</div>
+            <div class="t-slot">📦</div>
+          </div>
+          <div class="hud-group" style="font-size: 0.6rem; color: var(--gray);">
+            <span>⚙️</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-2" style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+        <div class="slide-label"><div class="dot-color" style="background: #1a3a1a;"></div> Grass</div>
+        <div class="slide-label"><div class="dot-color" style="background: #3d2b1a;"></div> Tilled Soil</div>
+        <div class="slide-label"><div class="dot-color" style="background: #2b1f15;"></div> Watered</div>
+        <div class="slide-label"><div class="dot-color" style="background: #1a3d1a; border: 1px dashed #2d5a2d;"></div> Greenhouse</div>
+        <div class="slide-label"><div class="dot-color" style="background: #132d4a;"></div> Water</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 5: SCIENCE PANELS ========== -->
+  <div class="slide" data-slide="4">
+    <div class="full-w center">
+      <p class="pixel accent-cyan" style="font-size: 0.7rem; margin-bottom: 0.5rem;">GAME UI — SCIENCE MODE</p>
+      <h2>Tap Any Plant to Zoom Into Science</h2>
+      <p class="subtitle" style="margin-bottom: 1.25rem;">Overlay panels show real biology &amp; chemistry without leaving the farm</p>
+
+      <div class="row gap-md mockup-row" style="justify-content: center; align-items: flex-start;">
+        <div class="overlay-mock">
+          <div class="overlay-head">
+            <span style="font-size: 0.8rem; font-weight: 700;">🔬 Cell View — Tomato Leaf</span>
+            <div class="overlay-x">✕</div>
+          </div>
+          <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap;">
+            <div>
+              <div class="cell-vis">
+                <div class="cell-dot" style="background: #22c55e; width: 22px; height: 22px;">☀️</div>
+                <div class="cell-dot" style="background: #22c55e; width: 18px; height: 18px;"></div>
+                <div class="cell-dot" style="background: #3b82f6; width: 24px; height: 24px;">🧬</div>
+                <div class="cell-dot" style="background: #eab308; width: 14px; height: 14px;"></div>
+                <div class="cell-dot" style="background: #22c55e; width: 16px; height: 16px;"></div>
+                <div class="cell-dot" style="background: #eab308; width: 12px; height: 12px;"></div>
+                <div class="cell-dot" style="background: #22c55e; width: 20px; height: 20px;">☀️</div>
+                <div class="cell-dot" style="background: #eab308; width: 14px; height: 14px;"></div>
+              </div>
+              <div style="margin-top: 0.5rem;">
+                <div class="legend-row"><div class="legend-dot" style="background: #22c55e;"></div> Chloroplast</div>
+                <div class="legend-row"><div class="legend-dot" style="background: #3b82f6;"></div> Nucleus</div>
+                <div class="legend-row"><div class="legend-dot" style="background: #eab308;"></div> Mitochondria</div>
+              </div>
+            </div>
+            <div style="flex: 1; min-width: 150px;">
+              <div style="font-size: 0.65rem; color: var(--green); font-weight: 600; margin-bottom: 0.3rem;">PHOTOSYNTHESIS</div>
+              <div class="chem-eq">6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</div>
+              <div style="margin-top: 0.6rem;">
+                <div class="mg"><span class="mg-l" style="width: 40px;">Rate</span><div class="mg-bar"><div class="mg-fill" style="width:78%; background: var(--green);"></div></div><span class="mg-v">78%</span></div>
+                <div class="mg"><span class="mg-l" style="width: 40px;">Light</span><div class="mg-bar"><div class="mg-fill" style="width:82%; background: var(--yellow);"></div></div><span class="mg-v">82%</span></div>
+                <div class="mg"><span class="mg-l" style="width: 40px;">CO₂</span><div class="mg-bar"><div class="mg-fill" style="width:65%; background: var(--gray);"></div></div><span class="mg-v">410p</span></div>
+                <div class="mg"><span class="mg-l" style="width: 40px;">H₂O</span><div class="mg-bar"><div class="mg-fill" style="width:72%; background: var(--cyan);"></div></div><span class="mg-v">72%</span></div>
+              </div>
+              <div style="font-size: 0.5rem; color: var(--gray); margin-top: 0.5rem; line-height: 1.5;">
+                Chloroplasts are converting light energy into glucose. CO₂ absorbed through stomata.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay-mock">
+          <div class="overlay-head">
+            <span style="font-size: 0.8rem; font-weight: 700;">⚗️ Soil Chemistry</span>
+            <div class="overlay-x">✕</div>
+          </div>
+          <div style="font-size: 0.6rem; color: var(--green); font-weight: 600; margin-bottom: 0.5rem;">NUTRIENT LEVELS</div>
+          <div class="mg"><span class="mg-l" style="width: 55px; font-size: 0.6rem;">pH</span><div class="mg-bar" style="height: 8px;"><div class="mg-fill" style="width:62%; background: var(--green);"></div></div><span class="mg-v" style="font-size: 0.6rem;">6.2</span></div>
+          <div class="mg"><span class="mg-l" style="width: 55px; font-size: 0.6rem;">N (NO₃⁻)</span><div class="mg-bar" style="height: 8px;"><div class="mg-fill" style="width:45%; background: var(--blue);"></div></div><span class="mg-v" style="font-size: 0.6rem;">45 ppm</span></div>
+          <div class="mg"><span class="mg-l" style="width: 55px; font-size: 0.6rem;">P (PO₄³⁻)</span><div class="mg-bar" style="height: 8px;"><div class="mg-fill" style="width:22%; background: var(--purple);"></div></div><span class="mg-v" style="font-size: 0.6rem;">18 ppm</span></div>
+          <div class="mg"><span class="mg-l" style="width: 55px; font-size: 0.6rem;">K (K⁺)</span><div class="mg-bar" style="height: 8px;"><div class="mg-fill" style="width:62%; background: var(--yellow);"></div></div><span class="mg-v" style="font-size: 0.6rem;">62 ppm</span></div>
+          <div class="mg"><span class="mg-l" style="width: 55px; font-size: 0.6rem;">Organic</span><div class="mg-bar" style="height: 8px;"><div class="mg-fill" style="width:32%; background: var(--orange);"></div></div><span class="mg-v" style="font-size: 0.6rem;">3.2%</span></div>
+
+          <div style="font-size: 0.6rem; color: var(--orange); font-weight: 600; margin: 0.75rem 0 0.3rem;">⚠️ ALERT</div>
+          <div style="font-size: 0.55rem; color: var(--gray); background: #1a1510; border: 1px solid #3d3020; border-radius: 6px; padding: 0.4rem 0.5rem; line-height: 1.5;">
+            Phosphorus is low. Add bone meal or comite to raise PO₄³⁻ levels. Current level may limit root development.
+          </div>
+
+          <div style="display: flex; gap: 0.4rem; margin-top: 0.75rem;">
+            <div class="sp-btn on" style="font-size: 0.5rem; padding: 4px 8px;">+ Fertilizer</div>
+            <div class="sp-btn" style="font-size: 0.5rem; padding: 4px 8px;">+ Lime</div>
+            <div class="sp-btn" style="font-size: 0.5rem; padding: 4px 8px;">📈 History</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 6: MOBILE LAYOUT ========== -->
+  <div class="slide" data-slide="5">
+    <div class="full-w center">
+      <p class="pixel accent-purple" style="font-size: 0.7rem; margin-bottom: 0.5rem;">GAME UI — MOBILE</p>
+      <h2>Same Game, Pocket-Sized</h2>
+      <p class="subtitle" style="margin-bottom: 1.25rem;">PWA with touch controls, bottom tab navigation, overlay panels</p>
+
+      <div class="row gap-lg mockup-row" style="justify-content: center; align-items: flex-start;">
+        <div style="text-align: center;">
+          <div class="phone-mock">
+            <div class="phone-notch"><div class="phone-pill"></div></div>
+            <div class="phone-body">
+              <div class="phone-hud">
+                <span>🌸 Spring Day 12</span>
+                <span>⭐ Lv.8</span>
+                <span>💰 1,250</span>
+              </div>
+              <div class="phone-game">
+                <div class="fc ft" style="font-size:0.6rem;">🌲</div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fwr" style="font-size:0.6rem;">🌊</div><div class="fc fwr" style="font-size:0.6rem;">🌊</div>
+                <div class="fc fg"></div><div class="fc fs" style="font-size:0.6rem;">🌱</div><div class="fc fw" style="font-size:0.6rem;">🌱</div><div class="fc fw" style="font-size:0.6rem;">🥬</div><div class="fc fg"></div><div class="fc fg"></div><div class="fc fg"></div>
+                <div class="fc fg"></div><div class="fc fs" style="font-size:0.6rem;">🌱</div><div class="fc fw" style="font-size:0.6rem;">🥬</div><div class="fc fw" style="font-size:0.6rem;">🍅</div><div class="fc fs"></div><div class="fc fg"></div><div class="fc fg"></div>
+                <div class="fc fp" style="font-size:0.6rem;">🏠</div><div class="fc fg"></div><div class="fc fs" style="font-size:0.6rem;">🥕</div><div class="fc fw" style="font-size:0.6rem;">🥕</div><div class="fc fs"></div><div class="fc fh" style="font-size:0.6rem;">🌻</div><div class="fc fg"></div>
+                <div class="fc fg"></div><div class="fc fg"></div><div class="fc fs" style="font-size:0.6rem;">🌾</div><div class="fc fw" style="font-size:0.6rem;">🌾</div><div class="fc fg"></div><div class="fc fh" style="font-size:0.6rem;">🌻</div><div class="fc fg"></div>
+                <div class="fc ft" style="font-size:0.6rem;">🌲</div><div class="fc fg" style="font-size:0.6rem;">🐝</div><div class="fc fg"></div><div class="fc fp"></div><div class="fc fg"></div><div class="fc fg"></div><div class="fc ft" style="font-size:0.6rem;">🌲</div>
+              </div>
+              <div style="display:flex; justify-content:center; gap:3px; padding:0.25rem; background:#0d1219; border-top:1px solid #1e3348;">
+                <div class="sp-btn" style="font-size:0.4rem; padding:2px 4px;">⏸</div>
+                <div class="sp-btn on" style="font-size:0.4rem; padding:2px 4px;">▶</div>
+                <div class="sp-btn" style="font-size:0.4rem; padding:2px 4px;">▶▶</div>
+                <div class="sp-btn" style="font-size:0.4rem; padding:2px 4px;">▶▶▶</div>
+              </div>
+              <div class="phone-tabs">
+                <div class="ph-tab on"><span class="ph-tab-icon">🌱</span><span class="ph-tab-label">Farm</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">🔬</span><span class="ph-tab-label">Science</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">🧪</span><span class="ph-tab-label">Lab</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📊</span><span class="ph-tab-label">Stats</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📦</span><span class="ph-tab-label">Items</span></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.65rem; color: var(--gray); margin-top: 0.75rem;">Farm View</p>
+        </div>
+
+        <div style="text-align: center;">
+          <div class="phone-mock">
+            <div class="phone-notch"><div class="phone-pill"></div></div>
+            <div class="phone-body">
+              <div class="phone-hud">
+                <span>← Back to Farm</span>
+                <span>🔬 Science</span>
+              </div>
+              <div style="flex:1; padding:0.5rem; background:#0d1219; display:flex; flex-direction:column; gap:0.5rem; overflow-y:auto;">
+                <div style="font-size:0.5rem; color:var(--green); font-weight:700; font-family:var(--pixel);">SOIL CHEMISTRY</div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">pH</span><div class="mg-bar"><div class="mg-fill" style="width:62%; background: var(--green);"></div></div><span class="mg-v" style="font-size:0.4rem;">6.2</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">N</span><div class="mg-bar"><div class="mg-fill" style="width:45%; background: var(--blue);"></div></div><span class="mg-v" style="font-size:0.4rem;">45</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">P</span><div class="mg-bar"><div class="mg-fill" style="width:22%; background: var(--purple);"></div></div><span class="mg-v" style="font-size:0.4rem;">18</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">K</span><div class="mg-bar"><div class="mg-fill" style="width:62%; background: var(--yellow);"></div></div><span class="mg-v" style="font-size:0.4rem;">62</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">H₂O</span><div class="mg-bar"><div class="mg-fill" style="width:78%; background: var(--cyan);"></div></div><span class="mg-v" style="font-size:0.4rem;">78%</span></div>
+
+                <div style="font-size:0.5rem; color:var(--cyan); font-weight:700; font-family:var(--pixel); margin-top:0.3rem;">ENVIRONMENT</div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">☀️</span><div class="mg-bar"><div class="mg-fill" style="width:80%; background: var(--yellow);"></div></div><span class="mg-v" style="font-size:0.4rem;">80%</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">🌡️</span><div class="mg-bar"><div class="mg-fill" style="width:55%; background: var(--orange);"></div></div><span class="mg-v" style="font-size:0.4rem;">22°C</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">CO₂</span><div class="mg-bar"><div class="mg-fill" style="width:40%; background: var(--gray);"></div></div><span class="mg-v" style="font-size:0.4rem;">410p</span></div>
+
+                <div style="font-size:0.5rem; color:var(--yellow); font-weight:700; font-family:var(--pixel); margin-top:0.3rem;">ECOSYSTEM</div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">🐝</span><div class="mg-bar"><div class="mg-fill" style="width:70%; background: var(--yellow);"></div></div><span class="mg-v" style="font-size:0.4rem;">Good</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">🐛</span><div class="mg-bar"><div class="mg-fill" style="width:25%; background: var(--red);"></div></div><span class="mg-v" style="font-size:0.4rem;">Low</span></div>
+                <div class="mg"><span class="mg-l" style="font-size:0.45rem;">🦋</span><div class="mg-bar"><div class="mg-fill" style="width:55%; background: var(--purple);"></div></div><span class="mg-v" style="font-size:0.4rem;">Med</span></div>
+              </div>
+              <div class="phone-tabs">
+                <div class="ph-tab"><span class="ph-tab-icon">🌱</span><span class="ph-tab-label">Farm</span></div>
+                <div class="ph-tab on"><span class="ph-tab-icon">🔬</span><span class="ph-tab-label">Science</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">🧪</span><span class="ph-tab-label">Lab</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📊</span><span class="ph-tab-label">Stats</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📦</span><span class="ph-tab-label">Items</span></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.65rem; color: var(--gray); margin-top: 0.75rem;">Science Panel</p>
+        </div>
+
+        <div style="text-align: center;">
+          <div class="phone-mock">
+            <div class="phone-notch"><div class="phone-pill"></div></div>
+            <div class="phone-body">
+              <div class="phone-hud">
+                <span>← Back</span>
+                <span>🧪 Experiment Lab</span>
+              </div>
+              <div style="flex:1; padding:0.5rem; background:#0d1219; display:flex; flex-direction:column; gap:0.4rem;">
+                <div style="font-size:0.5rem; color:var(--green); font-weight:700; font-family:var(--pixel);">PHOTOSYNTHESIS TEST</div>
+                <div style="font-size:0.4rem; color:var(--gray); line-height:1.4;">Hypothesis: More CO₂ = faster growth</div>
+                <div style="display:flex; gap:0.3rem; margin-top:0.2rem;">
+                  <div style="flex:1; background:#111820; border:1px solid #1e3348; border-radius:4px; padding:0.3rem; text-align:center;">
+                    <div style="font-size:0.4rem; color:var(--cyan); font-weight:600;">CONTROL</div>
+                    <div style="font-size:1.2rem; margin:0.2rem 0;">🌱</div>
+                    <div style="font-size:0.35rem; color:var(--gray);">CO₂: 410 ppm</div>
+                    <div style="font-size:0.35rem; color:var(--gray);">Growth: 100%</div>
+                  </div>
+                  <div style="flex:1; background:#111820; border:1px solid #2d4a3a; border-radius:4px; padding:0.3rem; text-align:center;">
+                    <div style="font-size:0.4rem; color:var(--green); font-weight:600;">EXPERIMENT</div>
+                    <div style="font-size:1.2rem; margin:0.2rem 0;">🌿</div>
+                    <div style="font-size:0.35rem; color:var(--gray);">CO₂: 800 ppm</div>
+                    <div style="font-size:0.35rem; color:var(--green);">Growth: 142%</div>
+                  </div>
+                </div>
+                <div style="background:#111820; border:1px solid #1e3348; border-radius:4px; padding:0.3rem;">
+                  <div style="font-size:0.4rem; color:var(--yellow); font-weight:600; margin-bottom:0.2rem;">RESULT GRAPH</div>
+                  <div style="display:flex; align-items:flex-end; gap:2px; height:40px; padding:0 0.2rem;">
+                    <div style="flex:1; background:var(--cyan); border-radius:2px 2px 0 0; height:30%;"></div>
+                    <div style="flex:1; background:var(--cyan); border-radius:2px 2px 0 0; height:45%;"></div>
+                    <div style="flex:1; background:var(--cyan); border-radius:2px 2px 0 0; height:55%;"></div>
+                    <div style="flex:1; background:var(--green); border-radius:2px 2px 0 0; height:50%;"></div>
+                    <div style="flex:1; background:var(--green); border-radius:2px 2px 0 0; height:70%;"></div>
+                    <div style="flex:1; background:var(--green); border-radius:2px 2px 0 0; height:90%;"></div>
+                    <div style="flex:1; background:var(--green); border-radius:2px 2px 0 0; height:100%;"></div>
+                  </div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.3rem; color:var(--gray); margin-top:2px;">
+                    <span>Day 1</span><span>Day 7</span>
+                  </div>
+                </div>
+                <div style="font-size:0.4rem; color:var(--gray); line-height:1.4;">
+                  ✅ Confirmed: Higher CO₂ increased growth rate by 42% over 7 days.
+                </div>
+              </div>
+              <div class="phone-tabs">
+                <div class="ph-tab"><span class="ph-tab-icon">🌱</span><span class="ph-tab-label">Farm</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">🔬</span><span class="ph-tab-label">Science</span></div>
+                <div class="ph-tab on"><span class="ph-tab-icon">🧪</span><span class="ph-tab-label">Lab</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📊</span><span class="ph-tab-label">Stats</span></div>
+                <div class="ph-tab"><span class="ph-tab-icon">📦</span><span class="ph-tab-label">Items</span></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 0.65rem; color: var(--gray); margin-top: 0.75rem;">Experiment Lab</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 7: ZOOM SYSTEM ========== -->
+  <div class="slide" data-slide="6">
     <div class="full-w center">
       <p class="pixel accent-cyan" style="font-size: 0.7rem; margin-bottom: 0.5rem;">CORE MECHANIC</p>
       <h2>Zoom Into the Science</h2>
@@ -878,7 +1454,7 @@ Lab:    Full freedom</div>
   <button type="button" class="nav-btn" onclick="go(-1)">← Prev</button>
   <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
     <div class="progress-dots" id="dots"></div>
-    <span class="slide-counter" id="counter">1 / 14</span>
+    <span class="slide-counter" id="counter">1 / 17</span>
   </div>
   <button type="button" class="nav-btn" onclick="go(1)">Next →</button>
 </div>
