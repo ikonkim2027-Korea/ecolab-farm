@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLab Farm — Pitch Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1923;
+    --bg2: #162231;
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --yellow: #facc15;
+    --orange: #fb923c;
+    --red: #f87171;
+    --blue: #60a5fa;
+    --purple: #c084fc;
+    --cyan: #22d3ee;
+    --white: #f1f5f9;
+    --gray: #94a3b8;
+    --dark: #0b1219;
+    --pixel: 'Press Start 2P', monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--dark);
+    font-family: var(--sans);
+    color: var(--white);
+  }
+
+  /* ── Slide Container ── */
+  .deck {
+    width: 100%; height: 100%;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh 8vw;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    transform: translateX(40px);
+    background: var(--bg);
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  /* ── Typography ── */
+  .pixel { font-family: var(--pixel); }
+  h1 { font-size: clamp(1.4rem, 4vw, 3rem); line-height: 1.3; font-weight: 700; }
+  h2 { font-size: clamp(1.1rem, 3vw, 2rem); line-height: 1.3; font-weight: 700; }
+  h3 { font-size: clamp(0.85rem, 1.8vw, 1.2rem); font-weight: 600; }
+  p, li { font-size: clamp(0.8rem, 1.5vw, 1.05rem); line-height: 1.7; color: var(--gray); }
+  .subtitle { color: var(--gray); font-size: clamp(0.75rem, 1.4vw, 1rem); margin-top: 1rem; }
+  .tag {
+    display: inline-block;
+    padding: 0.25em 0.75em;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0.2em;
+  }
+  .tag-green  { background: #16532d; color: var(--green); }
+  .tag-blue   { background: #1e3a5f; color: var(--blue); }
+  .tag-purple { background: #3b1f6e; color: var(--purple); }
+  .tag-yellow { background: #5c4813; color: var(--yellow); }
+  .tag-orange { background: #5c3011; color: var(--orange); }
+  .tag-red    { background: #5c1a1a; color: var(--red); }
+  .tag-cyan   { background: #0e3f47; color: var(--cyan); }
+
+  .accent-green  { color: var(--green); }
+  .accent-blue   { color: var(--blue); }
+  .accent-yellow { color: var(--yellow); }
+  .accent-orange { color: var(--orange); }
+  .accent-purple { color: var(--purple); }
+  .accent-cyan   { color: var(--cyan); }
+  .accent-red    { color: var(--red); }
+
+  /* ── Layout Helpers ── */
+  .row { display: flex; gap: 2.5vw; width: 100%; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 220px; }
+  .center { text-align: center; }
+  .left { text-align: left; }
+  .gap-sm { gap: 0.75rem; }
+  .gap-md { gap: 1.5rem; }
+  .gap-lg { gap: 2.5rem; }
+  .mt-1 { margin-top: 0.5rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-3 { margin-top: 1.5rem; }
+  .mt-4 { margin-top: 2.5rem; }
+  .full-w { width: 100%; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid #1e3348;
+    border-radius: 12px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 200px;
+  }
+  .card h3 { margin-bottom: 0.5rem; }
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  /* ── Table ── */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    margin-top: 1rem;
+  }
+  .tbl th, .tbl td {
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #1e3348;
+  }
+  .tbl th {
+    color: var(--green);
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tbl td { color: var(--gray); }
+  .tbl tr:last-child td { border-bottom: none; }
+
+  /* ── Code Block ── */
+  .code-block {
+    background: var(--dark);
+    border: 1px solid #1e3348;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: clamp(0.65rem, 1.1vw, 0.85rem);
+    line-height: 1.8;
+    color: var(--gray);
+    white-space: pre;
+    overflow-x: auto;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* ── Zoom Visual ── */
+  .zoom-chain {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .zoom-node {
+    background: var(--bg2);
+    border: 2px solid #1e3348;
+    border-radius: 10px;
+    padding: 0.75rem 1.2rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .zoom-node:hover { border-color: var(--green); }
+  .zoom-node .icon { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+  .zoom-node .label { font-size: 0.7rem; color: var(--gray); }
+  .zoom-arrow { color: var(--green); font-size: 1.2rem; font-weight: bold; }
+
+  /* ── Gauge ── */
+  .gauge-row { display: flex; align-items: center; gap: 0.5rem; margin: 0.3rem 0; font-size: 0.85rem; }
+  .gauge-label { width: 70px; color: var(--gray); font-size: 0.75rem; }
+  .gauge-bar { flex: 1; height: 10px; background: #1e293b; border-radius: 5px; overflow: hidden; max-width: 160px; }
+  .gauge-fill { height: 100%; border-radius: 5px; }
+  .gauge-val { font-size: 0.7rem; color: var(--gray); width: 55px; text-align: right; }
+
+  /* ── Tier Visual ── */
+  .tier-box {
+    background: var(--dark);
+    border: 1px solid #1e3348;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    min-width: 150px;
+    flex: 1;
+  }
+  .tier-box h4 { font-size: 0.8rem; margin-bottom: 0.5rem; }
+  .tier-box .plants { font-size: 1.4rem; letter-spacing: 0.3em; }
+  .tier-box .desc { font-size: 0.65rem; color: var(--gray); margin-top: 0.4rem; }
+
+  /* ── Timeline ── */
+  .timeline { display: flex; gap: 0; width: 100%; margin-top: 2rem; position: relative; }
+  .tl-item { flex: 1; padding: 1rem; position: relative; text-align: center; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--blue));
+    border-radius: 2px;
+  }
+  .tl-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--green);
+    border: 3px solid var(--bg);
+    margin: -10px auto 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-item:nth-child(2) .tl-dot { background: var(--blue); }
+  .tl-item:nth-child(3) .tl-dot { background: var(--purple); }
+  .tl-item h4 { font-size: 0.8rem; margin-bottom: 0.3rem; }
+  .tl-item p { font-size: 0.7rem; }
+
+  /* ── Progress Nav ── */
+  .nav-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(transparent, var(--dark));
+    z-index: 100;
+    pointer-events: none;
+  }
+  .nav-bar > * { pointer-events: auto; }
+  .progress-dots {
+    display: flex; gap: 6px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #334155;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--green); transform: scale(1.3); }
+  .nav-btn {
+    background: var(--bg2);
+    border: 1px solid #1e3348;
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: var(--sans);
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: #1e3348; }
+  .slide-counter {
+    font-family: var(--pixel);
+    font-size: 0.55rem;
+    color: var(--gray);
+  }
+
+  /* ── Pixel Decorations ── */
+  .pixel-border {
+    border: 3px solid var(--green);
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px #16532d;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .slide { padding: 4vh 6vw; }
+    .row { flex-direction: column; }
+    .code-block { font-size: 0.6rem; padding: 0.75rem; }
+    .zoom-chain { gap: 0.25rem; }
+    .zoom-node { padding: 0.5rem 0.7rem; }
+    .zoom-node .icon { font-size: 1.1rem; }
+    .nav-bar { padding: 0.75rem 1rem; }
+    .timeline { flex-direction: column; gap: 1rem; }
+    .tl-item::before { display: none; }
+    .tl-dot { margin: 0 auto 0.5rem; }
+  }
+
+  /* ── Pixel Art Sprites (CSS only) ── */
+  .pixel-plant {
+    display: inline-block;
+    width: 48px; height: 48px;
+    image-rendering: pixelated;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .hero-art {
+    font-size: 4rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 12px rgba(74, 222, 128, 0.3));
+  }
+
+  .blink { animation: blink 1.2s step-end infinite; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .float { animation: float 3s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  ul { list-style: none; padding: 0; }
+  ul li::before { content: '▸ '; color: var(--green); font-weight: bold; }
+  ul li { margin: 0.35rem 0; }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ========== SLIDE 1: TITLE ========== -->
+  <div class="slide active" data-slide="0">
+    <div class="center">
+      <div class="hero-art float">🌱🧪🌍</div>
+      <h1 class="pixel" style="font-size: clamp(1rem, 3.5vw, 2.2rem); color: var(--green);">
+        EcoLab Farm
+      </h1>
+      <p class="mt-2" style="font-size: clamp(0.9rem, 1.8vw, 1.3rem); color: var(--white);">
+        Learn Science by Growing
+      </p>
+      <p class="subtitle mt-2">
+        An educational virtual farming simulation where every seed<br>
+        teaches biology, chemistry, and environmental science.
+      </p>
+      <div class="mt-4">
+        <span class="tag tag-green">Pixel Art</span>
+        <span class="tag tag-blue">Web + Mobile</span>
+        <span class="tag tag-purple">Grades 4–8</span>
+        <span class="tag tag-yellow">100% Free</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 2: PROBLEM ========== -->
+  <div class="slide" data-slide="1">
+    <div class="full-w left">
+      <p class="pixel accent-red" style="font-size: 0.7rem; margin-bottom: 0.5rem;">THE PROBLEM</p>
+      <h1>Farm Games Teach<br><span class="accent-orange">Nothing About Farming</span></h1>
+      <div class="row mt-4">
+        <div class="card">
+          <span class="card-icon">🎮</span>
+          <h3>FarmVille / Hay Day</h3>
+          <p>Click to plant, wait, click to harvest. Zero science. Pure time-gating and microtransactions.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">⛏️</span>
+          <h3>Stardew Valley</h3>
+          <p>Great game, but farming is just a backdrop. Water + wait = crop. No biology, no chemistry.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📚</span>
+          <h3>Edu Platforms</h3>
+          <p>Textbooks with quizzes. No engagement, no simulation, no reason for students to come back.</p>
+        </div>
+      </div>
+      <p class="mt-3 center" style="color: var(--white); font-weight: 600;">
+        There is no product that combines <span class="accent-green">real science simulation</span> with <span class="accent-yellow">game engagement</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 3: SOLUTION ========== -->
+  <div class="slide" data-slide="2">
+    <div class="full-w left">
+      <p class="pixel accent-green" style="font-size: 0.7rem; margin-bottom: 0.5rem;">OUR SOLUTION</p>
+      <h1>Not a Farm Game.<br><span class="accent-green">A Science Lab</span> Disguised as One.</h1>
+      <div class="row mt-4 gap-md">
+        <div class="col">
+          <h3 class="accent-blue">🔬 Real Science Models</h3>
+          <p class="mt-1">Plants grow based on actual biology — photosynthesis, nutrient uptake, cell division. Not timers.</p>
+        </div>
+        <div class="col">
+          <h3 class="accent-yellow">🎮 Real Game Mechanics</h3>
+          <p class="mt-1">SimCity-style time control, difficulty modes, plant progression, neglect penalties. Not a textbook.</p>
+        </div>
+        <div class="col">
+          <h3 class="accent-purple">🧪 Real Experiments</h3>
+          <p class="mt-1">Control variables, run experiments, see molecular-level results. The scientific method, playable.</p>
+        </div>
+      </div>
+      <div class="code-block mt-4 center" style="max-width: 600px; margin-left: auto; margin-right: auto;">Water + Sunlight                     → it grows     ❌ Every farm game
+Water + Sunlight + NPK + pH + Temp   → it grows     ✅ EcoLab Farm
+  + CO₂ + Soil Microbes + Pollinators</div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 4: ZOOM SYSTEM ========== -->
+  <div class="slide" data-slide="3">
+    <div class="full-w center">
+      <p class="pixel accent-cyan" style="font-size: 0.7rem; margin-bottom: 0.5rem;">CORE MECHANIC</p>
+      <h2>Zoom Into the Science</h2>
+      <p class="subtitle">Click any plant to explore — from field view down to molecular level.</p>
+
+      <div class="zoom-chain mt-3">
+        <div class="zoom-node">
+          <span class="icon">🏡</span>
+          <span class="label">Farm</span>
+        </div>
+        <span class="zoom-arrow">→</span>
+        <div class="zoom-node">
+          <span class="icon">🌿</span>
+          <span class="label">Plot</span>
+        </div>
+        <span class="zoom-arrow">→</span>
+        <div class="zoom-node">
+          <span class="icon">🍅</span>
+          <span class="label">Plant</span>
+        </div>
+        <span class="zoom-arrow">→</span>
+        <div class="zoom-node">
+          <span class="icon">🍃</span>
+          <span class="label">Leaf / Root</span>
+        </div>
+        <span class="zoom-arrow">→</span>
+        <div class="zoom-node" style="border-color: var(--green);">
+          <span class="icon">🔬</span>
+          <span class="label">Cell</span>
+        </div>
+        <span class="zoom-arrow">→</span>
+        <div class="zoom-node" style="border-color: var(--cyan);">
+          <span class="icon">⚛️</span>
+          <span class="label">Molecule</span>
+        </div>
+      </div>
+
+      <div class="row mt-4 gap-md">
+        <div class="card">
+          <h3 class="accent-green">🍃 Leaf View</h3>
+          <p>Watch photosynthesis in real-time.<br>CO₂ + H₂O + light → glucose + O₂</p>
+        </div>
+        <div class="card">
+          <h3 class="accent-blue">🔬 Cell View</h3>
+          <p>See chloroplasts, mitochondria, cell walls. Observe osmosis pulling water through roots.</p>
+        </div>
+        <div class="card">
+          <h3 class="accent-cyan">⚛️ Molecular View</h3>
+          <p>NPK ions (NH₄⁺, NO₃⁻, K⁺) absorbed by roots. Fertilizer chemistry visualized.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 5: THREE SCIENCES ========== -->
+  <div class="slide" data-slide="4">
+    <div class="full-w left">
+      <p class="pixel accent-purple" style="font-size: 0.7rem; margin-bottom: 0.5rem;">CURRICULUM</p>
+      <h2>Three Sciences, One Farm</h2>
+      <div class="row mt-3 gap-md">
+        <div class="card" style="border-top: 3px solid var(--green);">
+          <h3><span class="accent-green">🧬 Biology</span></h3>
+          <ul class="mt-2">
+            <li>Photosynthesis & respiration</li>
+            <li>Cell structure & division</li>
+            <li>Root osmosis & nutrient uptake</li>
+            <li>Pollination & reproduction</li>
+            <li>Mendelian genetics & breeding</li>
+            <li>Food webs & symbiosis</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--blue);">
+          <h3><span class="accent-blue">⚗️ Chemistry</span></h3>
+          <ul class="mt-2">
+            <li>Soil pH & acid-base reactions</li>
+            <li>NPK nutrients & ionic chemistry</li>
+            <li>Fertilizer reactions (CaCO₃ neutralization)</li>
+            <li>Water cycle (molecular level)</li>
+            <li>Pesticide molecular structure</li>
+            <li>Organic matter decomposition</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--purple);">
+          <h3><span class="accent-purple">🌍 Environmental Sci</span></h3>
+          <ul class="mt-2">
+            <li>Climate change simulation</li>
+            <li>Carbon & water footprint tracking</li>
+            <li>Biodiversity & ecosystem balance</li>
+            <li>Acid rain & soil contamination</li>
+            <li>Organic vs conventional farming</li>
+            <li>Sustainability challenges</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 6: ENVIRONMENT CONTROL ========== -->
+  <div class="slide" data-slide="5">
+    <div class="full-w center">
+      <p class="pixel accent-yellow" style="font-size: 0.7rem; margin-bottom: 0.5rem;">KILLER FEATURE</p>
+      <h2>Full Environment Control</h2>
+      <p class="subtitle">Manipulate every variable. Observe every consequence.</p>
+
+      <div class="row mt-3 gap-md" style="align-items: flex-start;">
+        <div class="card" style="max-width: 380px; flex: 1.2;">
+          <h3 style="margin-bottom: 1rem;">🎛️ Environment Panel</h3>
+          <div class="gauge-row">
+            <span class="gauge-label">☀️ Light</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:80%; background: var(--yellow);"></div></div>
+            <span class="gauge-val">80%</span>
+          </div>
+          <div class="gauge-row">
+            <span class="gauge-label">🌡️ Temp</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:55%; background: var(--orange);"></div></div>
+            <span class="gauge-val">22°C</span>
+          </div>
+          <div class="gauge-row">
+            <span class="gauge-label">💧 Rain</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:25%; background: var(--blue);"></div></div>
+            <span class="gauge-val">Low</span>
+          </div>
+          <div class="gauge-row">
+            <span class="gauge-label">💨 CO₂</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:40%; background: var(--gray);"></div></div>
+            <span class="gauge-val">410 ppm</span>
+          </div>
+          <div class="gauge-row">
+            <span class="gauge-label">🧪 pH</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:62%; background: var(--green);"></div></div>
+            <span class="gauge-val">6.2</span>
+          </div>
+          <div class="gauge-row">
+            <span class="gauge-label">🌬️ Wind</span>
+            <div class="gauge-bar"><div class="gauge-fill" style="width:15%; background: var(--cyan);"></div></div>
+            <span class="gauge-val">Calm</span>
+          </div>
+        </div>
+        <div class="col" style="text-align: left;">
+          <h3 class="accent-orange">🌡️ Climate Scenarios</h3>
+          <ul class="mt-1">
+            <li>Global warming +2°C / +4°C</li>
+            <li>Acid rain event</li>
+            <li>Extended drought</li>
+            <li>Custom configuration</li>
+          </ul>
+          <h3 class="accent-green mt-3">🔗 Cause → Effect</h3>
+          <ul class="mt-1">
+            <li>↑ CO₂ → ↑ Temp → crop stress</li>
+            <li>Remove bees → pollination fails</li>
+            <li>Overuse pesticide → kill beneficials</li>
+            <li>↓ pH → nutrient lockout</li>
+          </ul>
+          <h3 class="accent-cyan mt-3">📊 Live Feedback</h3>
+          <ul class="mt-1">
+            <li>Real-time biodiversity graph</li>
+            <li>Carbon balance tracker</li>
+            <li>Ecosystem health score</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 7: EXPERIMENT MODE ========== -->
+  <div class="slide" data-slide="6">
+    <div class="full-w center">
+      <p class="pixel accent-blue" style="font-size: 0.7rem; margin-bottom: 0.5rem;">"WHAT IF" LAB</p>
+      <h2>The Scientific Method, Playable</h2>
+      <p class="subtitle">Run controlled experiments. Get real data. Write real reports.</p>
+
+      <div class="row mt-3 gap-md">
+        <div class="col left">
+          <table class="tbl">
+            <thead><tr><th>Experiment</th><th>Variable</th><th>Learning</th></tr></thead>
+            <tbody>
+              <tr><td>Photosynthesis</td><td>Light, CO₂, Temp</td><td>Rate curves & limits</td></tr>
+              <tr><td>Soil Chemistry</td><td>pH, NPK, Moisture</td><td>Optimal growth zones</td></tr>
+              <tr><td>Ecosystem</td><td>Add/remove species</td><td>Food webs & balance</td></tr>
+              <tr><td>Climate</td><td>Temp +1~5°C</td><td>Crop thresholds</td></tr>
+              <tr><td>Genetics</td><td>Cross-breeding</td><td>Dominant/recessive</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col left">
+          <div class="card" style="border-left: 3px solid var(--blue);">
+            <h3>🧪 Experiment Flow</h3>
+            <div class="code-block" style="margin-top: 0.75rem; font-size: 0.75rem;">
+1. Hypothesis   → "More CO₂ = faster growth"
+2. Setup        → Control + Experimental group
+3. Run          → Side-by-side simulation
+4. Observe      → Auto-generated graphs
+5. Conclude     → Report template provided</div>
+            <p class="mt-2">Students learn the scientific method by <em>doing</em> it — not memorizing steps from a textbook.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 8: DIFFICULTY ========== -->
+  <div class="slide" data-slide="7">
+    <div class="full-w center">
+      <p class="pixel accent-orange" style="font-size: 0.7rem; margin-bottom: 0.5rem;">DIFFICULTY SYSTEM</p>
+      <h2>Same World, Different Depth</h2>
+      <p class="subtitle">Difficulty = number of visible variables. The simulation underneath is identical.</p>
+
+      <div class="row mt-3 gap-md">
+        <div class="card" style="border-top: 3px solid var(--green);">
+          <h3>🌱 Easy <span class="tag tag-green">Grades 4–5</span></h3>
+          <div class="code-block" style="font-size: 0.7rem;">
+Manage: Water, Sunlight
+Events: Rare, simple
+Speed:  Up to 16x
+Neglect: 6hr grace period
+Science: Simple gauges
+Lab:    Guided experiments</div>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--yellow);">
+          <h3>🌿 Normal <span class="tag tag-yellow">Grades 5–7</span></h3>
+          <div class="code-block" style="font-size: 0.7rem;">
+Manage: + NPK, Pests
+Events: Regular
+Speed:  Up to 8x
+Neglect: 3hr grace period
+Science: Numbers + graphs
+Lab:    Semi-guided</div>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--red);">
+          <h3>🌳 Hard <span class="tag tag-red">Grades 7–8</span></h3>
+          <div class="code-block" style="font-size: 0.7rem;">
+Manage: + pH, CO₂, Temp,
+        Ecosystem, Economics
+Events: Frequent + compound
+Speed:  Up to 4x
+Neglect: 1hr grace period
+Science: Molecular + formulas
+Lab:    Full freedom</div>
+        </div>
+      </div>
+      <p class="mt-3" style="color: var(--white); font-size: 0.85rem;">
+        Switch anytime. Progress is never lost.
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 9: PLANT PROGRESSION ========== -->
+  <div class="slide" data-slide="8">
+    <div class="full-w center">
+      <p class="pixel accent-green" style="font-size: 0.7rem; margin-bottom: 0.5rem;">PROGRESSION</p>
+      <h2>Unlock Plants by Learning</h2>
+      <p class="subtitle">New plants require knowledge, not just time.</p>
+
+      <div class="row mt-3 gap-sm">
+        <div class="tier-box" style="border-top: 3px solid var(--green);">
+          <h4 class="accent-green">Tier 1 — Starter</h4>
+          <div class="plants">🥬🥕🌻🫘</div>
+          <div class="desc">Fast growth, forgiving. Learn basic life cycle.</div>
+        </div>
+        <div class="tier-box" style="border-top: 3px solid var(--blue);">
+          <h4 class="accent-blue">Tier 2 — Lv.6+</h4>
+          <div class="plants">🍅🥒🌶️🍆🧅</div>
+          <div class="desc">Needs NPK management. Pest-vulnerable.</div>
+        </div>
+        <div class="tier-box" style="border-top: 3px solid var(--purple);">
+          <h4 class="accent-purple">Tier 3 — Lv.16+</h4>
+          <div class="plants">🌽🍓🥔🌾🍉</div>
+          <div class="desc">Climate-sensitive. Complex soil needs.</div>
+        </div>
+        <div class="tier-box" style="border-top: 3px solid var(--yellow);">
+          <h4 class="accent-yellow">Tier 4 — Lv.31+</h4>
+          <div class="plants">🍇🍚🌿🌺🌳</div>
+          <div class="desc">Multi-year crops. Full ecosystem design.</div>
+        </div>
+      </div>
+
+      <div class="card mt-3 left" style="max-width: 600px; margin-left: auto; margin-right: auto;">
+        <h3>🔓 Unlock = Level + Harvest Record + Science Quest</h3>
+        <p class="mt-1">Example: Unlock 🍅 Tomato requires:<br>
+        <span class="accent-green">▸</span> Reach Level 6 &nbsp;
+        <span class="accent-blue">▸</span> Harvest lettuce 3× &nbsp;
+        <span class="accent-purple">▸</span> Complete "What is NPK?" experiment</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 10: TIME + NEGLECT ========== -->
+  <div class="slide" data-slide="9">
+    <div class="full-w center">
+      <p class="pixel accent-cyan" style="font-size: 0.7rem; margin-bottom: 0.5rem;">TIME SYSTEM</p>
+      <h2>SimCity Speed + Tamagotchi Stakes</h2>
+
+      <div class="row mt-3 gap-md">
+        <div class="card" style="flex: 1;">
+          <h3>⏩ Time Control</h3>
+          <table class="tbl">
+            <tbody>
+              <tr><td><strong>⏸</strong> Pause</td><td>Plan & place</td></tr>
+              <tr><td><strong>▶</strong> 1×</td><td>Observe & learn</td></tr>
+              <tr><td><strong>▶▶</strong> 4×</td><td>Accelerated growth</td></tr>
+              <tr><td><strong>▶▶▶</strong> 16×</td><td>Full season skip</td></tr>
+            </tbody>
+          </table>
+          <p class="mt-2">Events auto-pause the game — you can't skip the learning moments.</p>
+        </div>
+        <div class="card" style="flex: 1;">
+          <h3>💀 Neglect = Consequences</h3>
+          <table class="tbl">
+            <tbody>
+              <tr><td>Few hours</td><td>Soil dries, weeds appear</td></tr>
+              <tr><td>1 day</td><td>Crops wilt, pests increase</td></tr>
+              <tr><td>3 days</td><td>Partial crop death</td></tr>
+              <tr><td>1 week</td><td>Farm degradation</td></tr>
+            </tbody>
+          </table>
+          <p class="mt-2">On return: diagnostic report + recovery quest. <strong>Failure = teaching moment.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 11: PLATFORM ========== -->
+  <div class="slide" data-slide="10">
+    <div class="full-w center">
+      <p class="pixel accent-blue" style="font-size: 0.7rem; margin-bottom: 0.5rem;">PLATFORM</p>
+      <h2>Pixel Art. Web. Mobile. <span class="accent-green">~10MB.</span></h2>
+
+      <div class="row mt-3 gap-md">
+        <div class="col left">
+          <h3>🎨 Art Style</h3>
+          <p class="mt-1">16–32px tile-based pixel art. Top-down ¾ view. 32-color palette. Lightweight, charming, timeless.</p>
+
+          <h3 class="mt-3">📱 Mobile-First PWA</h3>
+          <p class="mt-1">No app store needed. Install from browser. Works on low-end phones and Chromebooks.</p>
+
+          <h3 class="mt-3">🔐 Auth</h3>
+          <p class="mt-1">Google Sign-In only. No passwords to manage. No PII collected beyond email.</p>
+        </div>
+        <div class="col">
+          <div class="card">
+            <h3>⚙️ Tech Stack</h3>
+            <table class="tbl">
+              <tbody>
+                <tr><td class="accent-green">Renderer</td><td>PixiJS (WebGL 2D)</td></tr>
+                <tr><td class="accent-green">Framework</td><td>Next.js</td></tr>
+                <tr><td class="accent-green">State</td><td>Zustand</td></tr>
+                <tr><td class="accent-green">Maps</td><td>Tiled Editor → JSON</td></tr>
+                <tr><td class="accent-green">Backend</td><td>Supabase</td></tr>
+                <tr><td class="accent-green">Deploy</td><td>Vercel</td></tr>
+                <tr><td class="accent-green">Mobile</td><td>PWA</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card mt-2">
+            <h3>📦 Total Size: ~10MB</h3>
+            <p>Sprites ~3MB · Tilemap ~0.5MB · UI ~1MB<br>Chiptune audio ~3MB · JS bundle ~500KB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 12: AUDIENCE ========== -->
+  <div class="slide" data-slide="11">
+    <div class="full-w center">
+      <p class="pixel accent-purple" style="font-size: 0.7rem; margin-bottom: 0.5rem;">AUDIENCE</p>
+      <h2>Who Is This For?</h2>
+
+      <div class="row mt-3 gap-md">
+        <div class="card" style="border-left: 3px solid var(--green);">
+          <span class="card-icon">🎒</span>
+          <h3>Students (Grades 4–8)</h3>
+          <p>Play a fun pixel farm game. Accidentally learn biology, chemistry, and environmental science in the process.</p>
+        </div>
+        <div class="card" style="border-left: 3px solid var(--blue);">
+          <span class="card-icon">👩‍🏫</span>
+          <h3>Teachers</h3>
+          <p>Assign experiments as homework. Track student progress. Lock difficulty per class. Trigger custom scenarios.</p>
+        </div>
+        <div class="card" style="border-left: 3px solid var(--purple);">
+          <span class="card-icon">👨‍👩‍👧</span>
+          <h3>Parents</h3>
+          <p>Screen time that's actually educational. Learning reports show what their child discovered this week.</p>
+        </div>
+      </div>
+
+      <div class="card mt-3 left" style="max-width: 650px; margin-left: auto; margin-right: auto;">
+        <h3>🏫 Teacher Dashboard</h3>
+        <ul class="mt-1">
+          <li>Class-wide progress overview & individual reports</li>
+          <li>Assign specific experiments as homework</li>
+          <li>Lock/unlock difficulty modes per class</li>
+          <li>Trigger weather events for live classroom demos</li>
+          <li>Export learning outcome data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 13: ROADMAP ========== -->
+  <div class="slide" data-slide="12">
+    <div class="full-w center">
+      <p class="pixel accent-yellow" style="font-size: 0.7rem; margin-bottom: 0.5rem;">ROADMAP</p>
+      <h2>Ship Fast. Grow With Users.</h2>
+
+      <div class="timeline mt-4">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <h4 class="accent-green">MVP (v1)</h4>
+          <p>Core farming loop<br>Tier 1–2 plants<br>Easy + Normal mode<br>Basic soil chemistry<br>Google auth + PWA</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <h4 class="accent-blue">v2 — Science</h4>
+          <p>Cell/molecule zoom<br>Experiment lab<br>Hard mode<br>Genetics system<br>Teacher dashboard</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <h4 class="accent-purple">v3 — Social</h4>
+          <p>Visit friend farms<br>Cooperative farming<br>Seasonal events<br>Market economy<br>Leaderboards</p>
+        </div>
+      </div>
+
+      <div class="row mt-4 gap-md" style="justify-content: center;">
+        <div class="card" style="max-width: 250px; text-align: center;">
+          <h3 class="accent-green" style="font-size: 2rem;">$0</h3>
+          <p>Free for all students.<br>No ads. No paywalls.<br>No microtransactions.</p>
+        </div>
+        <div class="card" style="max-width: 250px; text-align: center;">
+          <h3 class="accent-blue" style="font-size: 2rem;">~10MB</h3>
+          <p>Runs on any device.<br>School WiFi friendly.<br>No install required.</p>
+        </div>
+        <div class="card" style="max-width: 250px; text-align: center;">
+          <h3 class="accent-purple" style="font-size: 2rem;">3 Sciences</h3>
+          <p>Bio + Chem + Env Sci<br>Curriculum-aligned.<br>Experiment-driven.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 14: CLOSING ========== -->
+  <div class="slide" data-slide="13">
+    <div class="center">
+      <div class="hero-art float">🌱</div>
+      <h1 class="pixel" style="font-size: clamp(0.9rem, 3vw, 1.8rem); color: var(--green);">
+        EcoLab Farm
+      </h1>
+      <p class="mt-2" style="font-size: clamp(1rem, 2vw, 1.4rem); color: var(--white);">
+        Every seed planted is a lesson learned.
+      </p>
+      <p class="subtitle mt-2" style="max-width: 500px;">
+        A free, pixel-art science simulation that teaches students<br>
+        biology, chemistry, and environmental science — through play.
+      </p>
+      <div class="mt-4">
+        <span class="tag tag-green">Open Source</span>
+        <span class="tag tag-blue">Web + Mobile</span>
+        <span class="tag tag-purple">Grades 4–8</span>
+        <span class="tag tag-yellow">100% Free Forever</span>
+      </div>
+      <p class="pixel mt-4" style="font-size: 0.55rem; color: var(--gray);">
+        Let's grow something real. <span class="blink">_</span>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Navigation ── -->
+<div class="nav-bar">
+  <button type="button" class="nav-btn" onclick="go(-1)">← Prev</button>
+  <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+    <div class="progress-dots" id="dots"></div>
+    <span class="slide-counter" id="counter">1 / 14</span>
+  </div>
+  <button type="button" class="nav-btn" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  // Build dots
+  const dotsEl = document.getElementById('dots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    if (n < 0 || n >= total || n === current) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current === n ? current : current].classList.remove('exit'), 450);
+    const prev = current;
+    current = n;
+    slides[current].classList.add('active');
+    setTimeout(() => slides[prev].classList.remove('exit'), 450);
+    updateNav();
+  }
+
+  function go(dir) { goTo(current + dir); }
+
+  function updateNav() {
+    document.querySelectorAll('.dot').forEach((d, i) => { d.classList.toggle('active', i === current); });
+    document.getElementById('counter').textContent = `${current + 1} / ${total}`;
+  }
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+  });
+</script>
+
+</body>
+</html>
