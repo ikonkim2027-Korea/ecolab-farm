@@ -582,12 +582,45 @@
     width: 6px; height: 6px;
     border-radius: 50%;
   }
+  .feature-stack {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+  .feature-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    background: var(--dark);
+    border: 1px solid #1e3348;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+  .feature-line strong { color: var(--white); }
+  .feature-line span { color: var(--gray); font-size: 0.72rem; }
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .mini-card {
+    background: var(--dark);
+    border: 1px solid #1e3348;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .mini-card h4 { font-size: 0.8rem; margin-bottom: 0.4rem; }
+  .mini-card p { font-size: 0.72rem; line-height: 1.6; }
 
   @media (max-width: 768px) {
     .game-body { flex-direction: column; }
     .game-side { width: 100%; border-left: none; border-top: 2px solid #1e3348; flex-direction: row; flex-wrap: wrap; }
     .game-farm { grid-template-columns: repeat(7, 1fr); grid-template-rows: repeat(5, 1fr); }
     .mockup-row { flex-direction: column !important; align-items: center; }
+    .mini-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1343,8 +1376,119 @@ Lab:    Full freedom</div>
     </div>
   </div>
 
-  <!-- ========== SLIDE 12: AUDIENCE ========== -->
+  <!-- ========== SLIDE 12: AUTOMATION + CUSTOMIZATION ========== -->
   <div class="slide" data-slide="11">
+    <div class="full-w center">
+      <p class="pixel accent-green" style="font-size: 0.7rem; margin-bottom: 0.5rem;">PLAYER AGENCY</p>
+      <h2>Automation Without Killing the Learning</h2>
+      <p class="subtitle">Students should not babysit crops all day. The game should teach management, not repetitive clicking.</p>
+
+      <div class="row mt-3 gap-md" style="align-items:flex-start;">
+        <div class="card left" style="flex:1.1;">
+          <h3 class="accent-green">⏱ Routine Scheduler</h3>
+          <div class="feature-stack">
+            <div class="feature-line"><strong>Water Routine</strong><span>Checks every few hours, only waters below target moisture</span></div>
+            <div class="feature-line"><strong>Compost Routine</strong><span>Keeps microbes + organic matter healthy without overfeeding</span></div>
+            <div class="feature-line"><strong>NPK Routines</strong><span>Dose only when ppm falls below safe threshold</span></div>
+          </div>
+          <p class="mt-2">Automation becomes part of the science: students learn thresholds, dosing, efficiency, and system design.</p>
+        </div>
+        <div class="card left" style="flex:0.9;">
+          <h3 class="accent-yellow">🏗 Farm Customization</h3>
+          <ul class="mt-2">
+            <li>Lay out plots, irrigation, greenhouse, and pathways</li>
+            <li>Choose what to automate and what to manage by hand</li>
+            <li>Upgrade from simple farming to smart-farm infrastructure</li>
+            <li>Let planning itself become part of the learning loop</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini-card left">
+          <h4 class="accent-cyan">Easy Mode</h4>
+          <p>Automation support is generous. Students focus on plant life cycles, water, and sunlight without burnout.</p>
+        </div>
+        <div class="mini-card left">
+          <h4 class="accent-red">Hard Mode</h4>
+          <p>Automation still exists, but bad thresholds can overwater, overfeed, or stress the plant. The student must think like a systems manager.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 13: REAL-WORLD DATA ========== -->
+  <div class="slide" data-slide="12">
+    <div class="full-w center">
+      <p class="pixel accent-cyan" style="font-size: 0.7rem; margin-bottom: 0.5rem;">REAL SCIENCE DATA</p>
+      <h2>Connected to the Real World</h2>
+      <p class="subtitle">EcoLab Farm does not have to fake everything. It can be powered by the same data sources real scientists use.</p>
+
+      <div class="row mt-3 gap-md">
+        <div class="card left">
+          <h3>🌦 Weather + Climate</h3>
+          <ul class="mt-2">
+            <li>Open-Meteo for real weather and forecasts</li>
+            <li>NOAA CO₂ curve for climate experiment mode</li>
+            <li>Today’s real weather can become tomorrow’s classroom discussion</li>
+          </ul>
+        </div>
+        <div class="card left">
+          <h3>⚗️ Chemistry + Biology</h3>
+          <ul class="mt-2">
+            <li>PubChem for real fertilizer and molecule structures</li>
+            <li>USDA / FAO datasets for soil and crop comparisons</li>
+            <li>Students compare their farm with reality, not just with the game</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="code-block mt-3 center" style="max-width: 760px; margin-left:auto; margin-right:auto;">Today's Seoul rain forecast  → your farm receives rain
+Real atmospheric CO₂ history → your experiment lab uses scientific data
+PubChem fertilizer molecule  → your chemistry zoom uses actual structures</div>
+
+      <p class="mt-3" style="color: var(--white); font-weight:600;">That makes the product stronger than a game: it becomes a science platform.</p>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 14: CLASSROOM SAFETY ========== -->
+  <div class="slide" data-slide="13">
+    <div class="full-w center">
+      <p class="pixel accent-purple" style="font-size: 0.7rem; margin-bottom: 0.5rem;">CLASSROOM FIT</p>
+      <h2>Safe, Simple, and School-Friendly</h2>
+      <p class="subtitle">Designed for children first, not adapted from an adult game economy.</p>
+
+      <div class="row mt-3 gap-md">
+        <div class="card left" style="border-top: 3px solid var(--green);">
+          <h3>🔐 Low-Friction Access</h3>
+          <ul class="mt-2">
+            <li>Google Sign-In only</li>
+            <li>No password recovery headaches for schools</li>
+            <li>No unnecessary personal data collection</li>
+          </ul>
+        </div>
+        <div class="card left" style="border-top: 3px solid var(--yellow);">
+          <h3>🚫 No Risky Social Features</h3>
+          <ul class="mt-2">
+            <li>No chat in early versions</li>
+            <li>No ads, no paywalls, no microtransactions</li>
+            <li>Friend farms and co-op only after the core is stable</li>
+          </ul>
+        </div>
+        <div class="card left" style="border-top: 3px solid var(--blue);">
+          <h3>🏫 Built for Teachers</h3>
+          <ul class="mt-2">
+            <li>Homework, reporting, and difficulty locking</li>
+            <li>Live demo mode for classroom scenarios</li>
+            <li>Reliable on low-end devices and school Wi-Fi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SLIDE 15: AUDIENCE ========== -->
+  <div class="slide" data-slide="14">
     <div class="full-w center">
       <p class="pixel accent-purple" style="font-size: 0.7rem; margin-bottom: 0.5rem;">AUDIENCE</p>
       <h2>Who Is This For?</h2>
@@ -1380,8 +1524,8 @@ Lab:    Full freedom</div>
     </div>
   </div>
 
-  <!-- ========== SLIDE 13: ROADMAP ========== -->
-  <div class="slide" data-slide="12">
+  <!-- ========== SLIDE 16: ROADMAP ========== -->
+  <div class="slide" data-slide="15">
     <div class="full-w center">
       <p class="pixel accent-yellow" style="font-size: 0.7rem; margin-bottom: 0.5rem;">ROADMAP</p>
       <h2>Ship Fast. Grow With Users.</h2>
@@ -1390,12 +1534,12 @@ Lab:    Full freedom</div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <h4 class="accent-green">MVP (v1)</h4>
-          <p>Core farming loop<br>Tier 1–2 plants<br>Easy + Normal mode<br>Basic soil chemistry<br>Google auth + PWA</p>
+          <p>Core farming loop<br>Tier 1–2 plants<br>Easy + Normal mode<br>Basic soil chemistry<br>Google auth + PWA<br>Routine scheduler</p>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
           <h4 class="accent-blue">v2 — Science</h4>
-          <p>Cell/molecule zoom<br>Experiment lab<br>Hard mode<br>Genetics system<br>Teacher dashboard</p>
+          <p>Cell/molecule zoom<br>Experiment lab<br>Hard mode<br>Genetics system<br>Teacher dashboard<br>Real data APIs</p>
         </div>
         <div class="tl-item">
           <div class="tl-dot"></div>
@@ -1421,8 +1565,8 @@ Lab:    Full freedom</div>
     </div>
   </div>
 
-  <!-- ========== SLIDE 14: CLOSING ========== -->
-  <div class="slide" data-slide="13">
+  <!-- ========== SLIDE 17: CLOSING ========== -->
+  <div class="slide" data-slide="16">
     <div class="center">
       <div class="hero-art float">🌱</div>
       <h1 class="pixel" style="font-size: clamp(0.9rem, 3vw, 1.8rem); color: var(--green);">
@@ -1454,7 +1598,7 @@ Lab:    Full freedom</div>
   <button type="button" class="nav-btn" onclick="go(-1)">← Prev</button>
   <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
     <div class="progress-dots" id="dots"></div>
-    <span class="slide-counter" id="counter">1 / 17</span>
+    <span class="slide-counter" id="counter">1 / 20</span>
   </div>
   <button type="button" class="nav-btn" onclick="go(1)">Next →</button>
 </div>
